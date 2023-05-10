@@ -447,68 +447,6 @@ CREATE TABLE `qrtz_triggers`  (
 -- ----------------------------
 INSERT INTO `qrtz_triggers` VALUES ('quartzScheduler', 'org.jeecg.modules.wechat.job.ProcessWechatPayJob', 'DEFAULT', 'org.jeecg.modules.wechat.job.ProcessWechatPayJob', 'DEFAULT', NULL, 1583505033000, 1583505003000, 5, 'PAUSED', 'CRON', 1583462974000, 0, NULL, 0, '');
 
--- ----------------------------
--- Table structure for sys_announcement
--- ----------------------------
-DROP TABLE IF EXISTS `sys_announcement`;
-CREATE TABLE `sys_announcement`  (
-  `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `titile` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标题',
-  `msg_content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '内容',
-  `start_time` datetime NULL DEFAULT NULL COMMENT '开始时间',
-  `end_time` datetime NULL DEFAULT NULL COMMENT '结束时间',
-  `sender` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '发布人',
-  `priority` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '优先级（L低，M中，H高）',
-  `msg_category` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '2' COMMENT '消息类型1:通知公告2:系统消息',
-  `msg_type` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '通告对象类型（USER:指定用户，ALL:全体用户）',
-  `send_status` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '发布状态（0未发布，1已发布，2已撤销）',
-  `send_time` datetime NULL DEFAULT NULL COMMENT '发布时间',
-  `cancel_time` datetime NULL DEFAULT NULL COMMENT '撤销时间',
-  `del_flag` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '删除状态（0，正常，1已删除）',
-  `bus_type` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '业务类型(email:邮件 bpm:流程)',
-  `bus_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '业务id',
-  `open_type` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '打开方式(组件：component 路由：url)',
-  `open_page` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '组件/路由 地址',
-  `create_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新人',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `user_ids` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '指定用户',
-  `msg_abstract` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '摘要',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统通告表' ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of sys_announcement
--- ----------------------------
-INSERT INTO `sys_announcement` VALUES ('1b714f8ebc3cc33f8b4f906103b6a18d', '5467567', NULL, NULL, NULL, 'admin', NULL, '2', NULL, '1', '2019-03-30 12:40:38', NULL, '0', NULL, NULL, NULL, NULL, 'admin', '2019-02-26 17:23:26', 'admin', '2019-02-26 17:35:10', NULL, NULL);
-INSERT INTO `sys_announcement` VALUES ('3d11237ccdf62450d20bb8abdb331178', '111222', NULL, NULL, NULL, NULL, NULL, '2', NULL, '0', NULL, NULL, '1', NULL, NULL, NULL, NULL, 'admin', '2019-03-29 17:19:47', 'admin', '2019-03-29 17:19:50', NULL, NULL);
-INSERT INTO `sys_announcement` VALUES ('7ef04e95f8de030b1d5f7a9144090dc6', '111', NULL, '2019-02-06 17:28:10', '2019-03-08 17:28:11', NULL, NULL, '2', NULL, '0', NULL, NULL, '1', NULL, NULL, NULL, NULL, 'admin', '2019-02-26 17:28:17', 'admin', '2019-03-26 19:59:49', NULL, NULL);
-INSERT INTO `sys_announcement` VALUES ('93a9060a1c20e4bf98b3f768a02c2ff9', '111', '111', '2019-02-06 17:20:17', '2019-02-21 17:20:20', 'admin', 'M', '2', 'ALL', '1', '2019-02-26 17:24:29', NULL, '0', NULL, NULL, NULL, NULL, 'admin', '2019-02-26 17:16:26', 'admin', '2019-02-26 17:19:35', NULL, NULL);
-INSERT INTO `sys_announcement` VALUES ('de1dc57f31037079e1e55c8347fe6ef7', '222', '2222', '2019-02-06 17:28:26', '2019-02-23 17:28:28', 'admin', 'M', '2', 'ALL', '1', '2019-03-29 17:19:56', NULL, '1', NULL, NULL, NULL, NULL, 'admin', '2019-02-26 17:28:36', 'admin', '2019-02-26 17:28:40', NULL, NULL);
-INSERT INTO `sys_announcement` VALUES ('e52f3eb6215f139cb2224c52517af3bd', '334', '334', NULL, NULL, NULL, NULL, '2', NULL, '0', NULL, NULL, '1', NULL, NULL, NULL, NULL, 'admin', '2019-03-30 12:40:28', 'admin', '2019-03-30 12:40:32', NULL, NULL);
-
--- ----------------------------
--- Table structure for sys_announcement_send
--- ----------------------------
-DROP TABLE IF EXISTS `sys_announcement_send`;
-CREATE TABLE `sys_announcement_send`  (
-  `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `annt_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '通告ID',
-  `user_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户id',
-  `read_flag` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '阅读状态（0未读，1已读）',
-  `read_time` datetime NULL DEFAULT NULL COMMENT '阅读时间',
-  `create_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新人',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间'
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户通告阅读标记表' ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of sys_announcement_send
--- ----------------------------
-INSERT INTO `sys_announcement_send` VALUES ('646c0c405ec643d4dc4160db2446f8ff', '93a9060a1c20e4bf98b3f768a02c2ff9', 'e9ca23d68d884d4ebb19d07889727dae', '1', '2022-04-15 18:47:06', 'admin', '2019-05-17 11:50:56', 'admin', '2022-04-15 18:47:06');
-INSERT INTO `sys_announcement_send` VALUES ('1197434450981543938', '93a9060a1c20e4bf98b3f768a02c2ff9', 'a75d45a015c44384a04449ee80dc3503', '1', '2020-03-02 16:55:06', 'jeecg', '2019-11-21 16:39:55', 'jeecg', '2020-03-02 16:55:06');
 
 -- ----------------------------
 -- Table structure for sys_category
@@ -607,18 +545,17 @@ CREATE TABLE `sys_config`  (
 -- Records of sys_config
 -- ----------------------------
 INSERT INTO `sys_config` VALUES ('1481959780167823362', '_address', '', 1, NULL);
-INSERT INTO `sys_config` VALUES ('1481959780360761346', 'brandName', 'Teaching', 1, NULL);
-INSERT INTO `sys_config` VALUES ('1481959780637585409', 'footer', '<p>Copyright &copy; 2020&nbsp;<a href=\"https://teaching.vip\" target=\"_blank\" rel=\"noopener\">Teaching</a> | Teaching开源Steam教学平台 <a href=\"https://github.com/open-scratch/teaching\" target=\"_blank\" rel=\"noopener\">Github</a></p>\n<p><a href=\"http://beian.miit.gov.cn/\" target=\"_blank\" rel=\"noopener\">沪ICP备20009532号-4</a></p>', 1, NULL);
+INSERT INTO `sys_config` VALUES ('1481959780360761346', 'brandName', '少儿在线编程教学平台', 1, NULL);
+INSERT INTO `sys_config` VALUES ('1481959780637585409', 'footer', '<p>Copyright &copy; 2023&nbsp;<a href=\"http://www.yunhuikeji.cn\" target=\"_blank\" rel=\"noopener\">云晖科技</a> | 少儿在线编程教学平台 </p>', 1, NULL);
 INSERT INTO `sys_config` VALUES ('1481959780801163266', '_phone', '', 1, NULL);
 INSERT INTO `sys_config` VALUES ('1481959781103153153', '_defaultRole', '1252532277234982913', 1, NULL);
-INSERT INTO `sys_config` VALUES ('1481959781228982274', 'logo', 'fd34a6de38af4d19a370e56c019d5280.png', 1, NULL);
+INSERT INTO `sys_config` VALUES ('1481959781228982274', 'logo', 'logo.png', 1, NULL);
 INSERT INTO `sys_config` VALUES ('1481959782168506369', 'allowReg', '1', 1, NULL);
 INSERT INTO `sys_config` VALUES ('1481959782298529794', '_linkman', '', 1, NULL);
 INSERT INTO `sys_config` VALUES ('1514923379054829570', '_defaultDepart', '4338928a0bbc4bb89fce1523142083a6', 1, NULL);
-INSERT INTO `sys_config` VALUES ('1515593345009672194', 'brandDesc', '开源STEAM教学平台', 1, NULL);
-INSERT INTO `sys_config` VALUES ('1612381213129633793', 'banner', 'c692359341d94ccab47dd268f99bee85.jpg,290fdda5854e46779f55c9b7b0d47f06.jpg', 1, NULL);
-INSERT INTO `sys_config` VALUES ('1612381213259657218', 'bannerLinks', 'https://teaching.vip', 1, NULL);
-INSERT INTO `sys_config` VALUES ('1624626469954789378', '_indexHtml', '<p><em><strong><img src=\"https://teaching.vip/wp-content/uploads/2020/04/teaching-logo-l-1.png\" alt=\"\" width=\"512\" height=\"128\" /></strong></em></p>\n<h1><em><strong>欢迎使用Teaching教学平台</strong></em></h1>', 1, NULL);
+INSERT INTO `sys_config` VALUES ('1515593345009672194', 'brandDesc', '少儿在线编程教学平台', 1, NULL);
+INSERT INTO `sys_config` VALUES ('1612381213129633793', 'banner', 'banner1.jpg,banner2.jpg', 1, NULL);
+INSERT INTO `sys_config` VALUES ('1612381213259657218', 'bannerLinks', 'http://localhost', 1, NULL);
 
 -- ----------------------------
 -- Table structure for sys_data_log
@@ -1075,80 +1012,6 @@ CREATE TABLE `sys_file`  (
 -- ----------------------------
 -- Records of sys_file
 -- ----------------------------
-INSERT INTO `sys_file` VALUES ('1515608503719186433', '2022-04-17 16:30:00', NULL, 'admin', NULL, 'A01', 2, 'project3/c51771f8-044b-4de5-a6f7-63449a8ca87b.jpg', 'project3/c51771f8-044b-4de5-a6f7-63449a8ca87b.jpg', 2, '学生作业-封面', 0);
-INSERT INTO `sys_file` VALUES ('1515608504516104193', '2022-04-17 16:30:00', NULL, 'admin', NULL, 'A01', 2, 'project3/c51771f8-044b-4de5-a6f7-63449a8ca87b.sb3', 'project3/c51771f8-044b-4de5-a6f7-63449a8ca87b.sb3', 2, '学生作业-sb3', 0);
-INSERT INTO `sys_file` VALUES ('1515610657402114049', '2022-04-17 16:38:34', NULL, 'admin', NULL, 'A01', 2, 'project3/9b8f66ec-57e7-40b7-b5a3-0189406c2c43.jpg', 'project3/9b8f66ec-57e7-40b7-b5a3-0189406c2c43.jpg', 2, '学生作业-封面', 0);
-INSERT INTO `sys_file` VALUES ('1515610657859293185', '2022-04-17 16:38:34', NULL, 'admin', NULL, 'A01', 2, 'project3/9b8f66ec-57e7-40b7-b5a3-0189406c2c43.sb3', 'project3/9b8f66ec-57e7-40b7-b5a3-0189406c2c43.sb3', 2, '学生作业-sb3', 0);
-INSERT INTO `sys_file` VALUES ('1515610671859879938', '2022-04-17 16:38:37', NULL, 'admin', NULL, 'A01', 2, 'project3/f26e0829-5e7b-4063-887e-9aa48f68de62.jpg', 'project3/f26e0829-5e7b-4063-887e-9aa48f68de62.jpg', 2, '学生作业-封面', 0);
-INSERT INTO `sys_file` VALUES ('1515610673516630017', '2022-04-17 16:38:37', NULL, 'admin', NULL, 'A01', 2, 'project3/f26e0829-5e7b-4063-887e-9aa48f68de62.sb3', 'project3/f26e0829-5e7b-4063-887e-9aa48f68de62.sb3', 2, '学生作业-sb3', 0);
-INSERT INTO `sys_file` VALUES ('1515612029354758146', '2022-04-17 16:44:01', NULL, 'admin', NULL, 'A01', 2, 'project3/95de6df6-2c74-41c6-a79c-0352528b7283.jpg', 'project3/95de6df6-2c74-41c6-a79c-0352528b7283.jpg', 2, '学生作业-封面', 0);
-INSERT INTO `sys_file` VALUES ('1515612029782577154', '2022-04-17 16:44:01', NULL, 'admin', NULL, 'A01', 2, 'project3/95de6df6-2c74-41c6-a79c-0352528b7283.sb3', 'project3/95de6df6-2c74-41c6-a79c-0352528b7283.sb3', 2, '学生作业-sb3', 0);
-INSERT INTO `sys_file` VALUES ('1515612041920892930', '2022-04-17 16:44:04', NULL, 'admin', NULL, 'A01', 2, 'project3/b0dda1bb-2b6f-409d-8404-60ec99209ed8.sb3', 'project3/b0dda1bb-2b6f-409d-8404-60ec99209ed8.sb3', 2, '学生作业-sb3', 0);
-INSERT INTO `sys_file` VALUES ('1515612042982051841', '2022-04-17 16:44:04', NULL, 'admin', NULL, 'A01', 2, 'project3/b0dda1bb-2b6f-409d-8404-60ec99209ed8.jpg', 'project3/b0dda1bb-2b6f-409d-8404-60ec99209ed8.jpg', 2, '学生作业-封面', 0);
-INSERT INTO `sys_file` VALUES ('1515612054998732802', '2022-04-17 16:44:07', NULL, 'admin', NULL, 'A01', 2, 'project3/832aa725-3457-45e9-9a5b-2a5a28fad2fb.jpg', 'project3/832aa725-3457-45e9-9a5b-2a5a28fad2fb.jpg', 2, '学生作业-封面', 0);
-INSERT INTO `sys_file` VALUES ('1515612056634511361', '2022-04-17 16:44:07', NULL, 'admin', NULL, 'A01', 2, 'project3/832aa725-3457-45e9-9a5b-2a5a28fad2fb.sb3', 'project3/832aa725-3457-45e9-9a5b-2a5a28fad2fb.sb3', 2, '学生作业-sb3', 0);
-INSERT INTO `sys_file` VALUES ('1515612476119437313', '2022-04-17 16:45:47', NULL, 'admin', NULL, 'A01', 2, 'project3/ed89de0f-5c01-49f4-b697-b1bdf4c77b55.sb3', 'project3/ed89de0f-5c01-49f4-b697-b1bdf4c77b55.sb3', 2, '学生作业-sb3', 0);
-INSERT INTO `sys_file` VALUES ('1515612476488536065', '2022-04-17 16:45:47', NULL, 'admin', NULL, 'A01', 2, 'project3/ed89de0f-5c01-49f4-b697-b1bdf4c77b55.jpg', 'project3/ed89de0f-5c01-49f4-b697-b1bdf4c77b55.jpg', 2, '学生作业-封面', 0);
-INSERT INTO `sys_file` VALUES ('1515614532653797378', '2022-04-17 16:53:57', NULL, 'admin', NULL, 'A01', 2, 'project3/272a61de-d759-450d-8749-0c352876bb99.sb3', 'project3/272a61de-d759-450d-8749-0c352876bb99.sb3', 2, '学生作业-sb3', 0);
-INSERT INTO `sys_file` VALUES ('1515614533073227778', '2022-04-17 16:53:58', NULL, 'admin', NULL, 'A01', 2, 'project3/272a61de-d759-450d-8749-0c352876bb99.jpg', 'project3/272a61de-d759-450d-8749-0c352876bb99.jpg', 2, '学生作业-封面', 0);
-INSERT INTO `sys_file` VALUES ('1517392481371623425', '2022-04-22 14:38:54', NULL, 'admin', NULL, 'A03', NULL, '6e67087d-e48a-4dd3-9632-ee669ffc0187code.jpg', 'a9a5f11099be41ed835b5afed91057ec.jpg', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1517392538988777474', '2022-04-22 14:39:07', NULL, 'admin', NULL, 'A03', NULL, '6e67087d-e48a-4dd3-9632-ee669ffc0187code.jpg', 'f336c87d32b44ede9876f32f9f3795b6.jpg', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1517392814554550274', '2022-04-22 14:40:13', NULL, 'admin', NULL, 'A03', NULL, 'test.pptx', 'f3359d8cb4044440964af742ae4aaf24.pptx', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1517392834825621505', '2022-04-22 14:40:18', NULL, 'admin', NULL, 'A03', NULL, '新建文本文档.zip', '02e545a1105c4e508361a4857c78e23e.zip', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1517393019450494978', '2022-04-22 14:41:02', NULL, 'admin', NULL, 'A03', NULL, 'cctv.mp4', '68eab0373242436986414ad2fc7ff706.mp4', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1517394959613890561', '2022-04-22 14:48:44', NULL, 'admin', NULL, 'A03', NULL, 'cctv.mp4', '48fb413ad3c94b1bbdaafae77184bd43.mp4', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1517395581432041474', '2022-04-22 14:51:13', NULL, 'admin', NULL, 'A03', 2, 'project3/47c28064-fd48-4c81-840b-bd827b5147a6.jpg', 'project3/47c28064-fd48-4c81-840b-bd827b5147a6.jpg', 2, '学生作业-封面', 0);
-INSERT INTO `sys_file` VALUES ('1517395582551920641', '2022-04-22 14:51:13', NULL, 'admin', NULL, 'A03', 2, 'project3/47c28064-fd48-4c81-840b-bd827b5147a6.sb3', 'project3/47c28064-fd48-4c81-840b-bd827b5147a6.sb3', 2, '学生作业-sb3', 0);
-INSERT INTO `sys_file` VALUES ('1517395624650149889', '2022-04-22 14:51:23', NULL, 'admin', NULL, 'A03', 2, 'project3/9bd180fe-e66b-4ded-8527-237e8676524a.sb3', 'project3/9bd180fe-e66b-4ded-8527-237e8676524a.sb3', 2, '学生作业-sb3', 0);
-INSERT INTO `sys_file` VALUES ('1517395625098940418', '2022-04-22 14:51:23', NULL, 'admin', NULL, 'A03', 2, 'project3/9bd180fe-e66b-4ded-8527-237e8676524a.jpg', 'project3/9bd180fe-e66b-4ded-8527-237e8676524a.jpg', 2, '学生作业-封面', 0);
-INSERT INTO `sys_file` VALUES ('1517395655587336193', '2022-04-22 14:51:30', NULL, 'admin', NULL, 'A03', 2, 'project3/a94ec49d-826b-404d-9985-5c61f420c38e.jpg', 'project3/a94ec49d-826b-404d-9985-5c61f420c38e.jpg', 2, '学生作业-封面', 0);
-INSERT INTO `sys_file` VALUES ('1517395657600602113', '2022-04-22 14:51:31', NULL, 'admin', NULL, 'A03', 2, 'project3/a94ec49d-826b-404d-9985-5c61f420c38e.sb3', 'project3/a94ec49d-826b-404d-9985-5c61f420c38e.sb3', 2, '学生作业-sb3', 0);
-INSERT INTO `sys_file` VALUES ('1517395751389433858', '2022-04-22 14:51:53', NULL, 'admin', NULL, 'A03', 2, 'project3/fff2d0a0-948c-4c58-ab2d-229994818a3f.jpg', 'project3/fff2d0a0-948c-4c58-ab2d-229994818a3f.jpg', 2, '学生作业-封面', 0);
-INSERT INTO `sys_file` VALUES ('1517395754593882113', '2022-04-22 14:51:54', NULL, 'admin', NULL, 'A03', 2, 'project3/fff2d0a0-948c-4c58-ab2d-229994818a3f.sb3', 'project3/fff2d0a0-948c-4c58-ab2d-229994818a3f.sb3', 2, '学生作业-sb3', 0);
-INSERT INTO `sys_file` VALUES ('1517396213991804929', '2022-04-22 14:53:43', NULL, 'admin', NULL, 'A03', NULL, '新作品.sb3', '55246252c13741bfaa9bf8f525692ebb.sb3', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1517396245046431746', '2022-04-22 14:53:51', NULL, 'admin', NULL, 'A03', NULL, 'test.pptx', '4769b8f563224d1692a1f6273f88bf9b.pptx', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1517396540770029569', '2022-04-22 14:55:01', NULL, 'student', NULL, 'A01A05A01', 2, 'project3/e026be88-3af1-42c7-828d-8fcbabaedcfd.jpg', 'project3/e026be88-3af1-42c7-828d-8fcbabaedcfd.jpg', 2, '学生作业-封面', 0);
-INSERT INTO `sys_file` VALUES ('1517396541818605569', '2022-04-22 14:55:02', NULL, 'student', NULL, 'A01A05A01', 2, 'project3/e026be88-3af1-42c7-828d-8fcbabaedcfd.sb3', 'project3/e026be88-3af1-42c7-828d-8fcbabaedcfd.sb3', 2, '学生作业-sb3', 0);
-INSERT INTO `sys_file` VALUES ('1517398548180701185', '2022-04-22 15:03:00', NULL, 'admin', NULL, 'A01', NULL, '6e67087d-e48a-4dd3-9632-ee669ffc0187code.jpg', '/internalapi/asset/7aace28370994d3b8b9c3efe05e099f0.jpg', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1517398700459102210', '2022-04-22 15:03:36', NULL, 'admin', NULL, 'A01', NULL, 'student.615cea8d.png', '/internalapi/asset/24d693da2c5d4fe88c7cfe42581b7f73.png', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1517398774090108930', '2022-04-22 15:03:54', NULL, 'admin', NULL, 'A01', NULL, 'student.615cea8d.png', '/internalapi/asset/447430fd7e1842f98f629b0352b1c97c.png', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1517398782696820737', '2022-04-22 15:03:56', NULL, 'admin', NULL, 'A01', NULL, 'teacher.f50f69d6.png', '/internalapi/asset/c784768cb9ad4e9c9d38d5ceddaaf5d3.png', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1517398789881663489', '2022-04-22 15:03:58', NULL, 'admin', NULL, 'A01', NULL, 'worker.1928367c.png', '/internalapi/asset/1aa502aaec1d44d1b6f502b099ae48f5.png', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1517400067542159361', '2022-04-22 15:09:02', NULL, 'teacher', NULL, 'A01A06A01', NULL, 'MyBass.wav', '/internalapi/asset/e04a8cdd0ade4b30829c226e3c3cf396.wav', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1526592604288557057', '2022-05-17 23:56:54', NULL, 'admin', NULL, 'A01', 2, '管理员作品_1652803014187.jpg', '管理员作品_1652803014187.jpg', 1, '学生作业-封面', 0);
-INSERT INTO `sys_file` VALUES ('1526592604745736194', '2022-05-17 23:56:54', NULL, 'admin', NULL, 'A01', 2, '管理员作品_1652803014193.sb3', '管理员作品_1652803014193.sb3', 1, '学生作业-sb3', 0);
-INSERT INTO `sys_file` VALUES ('1526593958805479426', '2022-05-18 00:02:17', NULL, 'admin', NULL, 'A01', 2, '管理员作品_1652803336834.sb3', '管理员作品_1652803336834.sb3', 1, '学生作业-sb3', 0);
-INSERT INTO `sys_file` VALUES ('1526593960361566209', '2022-05-18 00:02:17', NULL, 'admin', NULL, 'A01', 2, '管理员作品_1652803336843.jpg', '管理员作品_1652803336843.jpg', 1, '学生作业-封面', 0);
-INSERT INTO `sys_file` VALUES ('1526594316084682753', '2022-05-18 00:03:42', NULL, 'admin', NULL, 'A01', NULL, 'Epic Ninja v1.12.sb3', 'Epic Ninja v1.12_1652803422180.12.sb3', 1, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1526596730799960066', '2022-05-18 00:13:17', NULL, 'admin', NULL, 'A01', NULL, 'cctv.mp4', 'cctv_1652803997654.mp4', 1, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1548245388817616898', '2022-07-16 17:57:20', NULL, 'admin', NULL, 'A01', NULL, '微信图片_20220715192726.png', '84007868ca884e9c97f20a7fb77f1b73.png', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1548248465100525570', '2022-07-16 18:09:33', NULL, 'admin', NULL, 'A01', NULL, '微信图片_20220715192734.png', '833129f15121472f812fd62009095c59.png', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1587018453929877506', '2022-10-31 17:47:39', NULL, 'admin', NULL, 'A01', 2, 'project3/b4c55621-bfe5-4b53-8529-8a6fc8a0f0ed.jpg', 'project3/b4c55621-bfe5-4b53-8529-8a6fc8a0f0ed.jpg', 2, '学生作业-封面', 0);
-INSERT INTO `sys_file` VALUES ('1587018454609354754', '2022-10-31 17:47:39', NULL, 'admin', NULL, 'A01', 2, 'project3/b4c55621-bfe5-4b53-8529-8a6fc8a0f0ed.sb3', 'project3/b4c55621-bfe5-4b53-8529-8a6fc8a0f0ed.sb3', 2, '学生作业-sb3', 0);
-INSERT INTO `sys_file` VALUES ('1587018953207242754', '2022-10-31 17:49:38', NULL, 'admin', NULL, 'A01', 2, 'project3/ac1346b1-3823-49ef-8b3d-6ca1afd50678.jpg', 'project3/ac1346b1-3823-49ef-8b3d-6ca1afd50678.jpg', 2, '学生作业-封面', 0);
-INSERT INTO `sys_file` VALUES ('1587018954369064961', '2022-10-31 17:49:38', NULL, 'admin', NULL, 'A01', 2, 'project3/ac1346b1-3823-49ef-8b3d-6ca1afd50678.sb3', 'project3/ac1346b1-3823-49ef-8b3d-6ca1afd50678.sb3', 2, '学生作业-sb3', 0);
-INSERT INTO `sys_file` VALUES ('1587018968826830849', '2022-10-31 17:49:42', NULL, 'admin', NULL, 'A01', 2, 'project3/5af4455f-d622-4ece-a1bf-8da621f9daf9.jpg', 'project3/5af4455f-d622-4ece-a1bf-8da621f9daf9.jpg', 2, '学生作业-封面', 0);
-INSERT INTO `sys_file` VALUES ('1587018973830635521', '2022-10-31 17:49:43', NULL, 'admin', NULL, 'A01', 2, 'project3/5af4455f-d622-4ece-a1bf-8da621f9daf9.sb3', 'project3/5af4455f-d622-4ece-a1bf-8da621f9daf9.sb3', 2, '学生作业-sb3', 0);
-INSERT INTO `sys_file` VALUES ('1587019590808559617', '2022-10-31 17:52:10', NULL, 'student', NULL, '班级2,班级1', 2, 'project3/7f1c494d-7554-4228-8572-17e51e518fa0.jpg', 'project3/7f1c494d-7554-4228-8572-17e51e518fa0.jpg', 2, '学生作业-封面', 0);
-INSERT INTO `sys_file` VALUES ('1587019591198629890', '2022-10-31 17:52:10', NULL, 'student', NULL, '班级2,班级1', 2, 'project3/7f1c494d-7554-4228-8572-17e51e518fa0.sb3', 'project3/7f1c494d-7554-4228-8572-17e51e518fa0.sb3', 2, '学生作业-sb3', 0);
-INSERT INTO `sys_file` VALUES ('1587278337638330370', '2022-11-01 11:00:20', NULL, 'admin', NULL, 'A01', NULL, 'teacher.f50f69d6.png', '4c9b63c898324bc0a785385dc65068f2.png', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1587308400559714305', '2022-11-01 12:59:48', NULL, 'admin', NULL, 'A01', NULL, 'logo.png', 'fd34a6de38af4d19a370e56c019d5280.png', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1588090873014513666', '2022-11-03 16:49:04', NULL, 'admin', NULL, 'A01', 2, 'blockly/a0e08d5f-9afc-4aec-84f9-6487d2b58489.xml', 'blockly/a0e08d5f-9afc-4aec-84f9-6487d2b58489.xml', 2, '学生作业-blockly', 0);
-INSERT INTO `sys_file` VALUES ('1588090917876789249', '2022-11-03 16:49:14', NULL, 'admin', NULL, 'A01', 2, 'blockly/7173ebf5-5118-4af9-9751-9914169080e4.xml', 'blockly/7173ebf5-5118-4af9-9751-9914169080e4.xml', 2, '学生作业-blockly', 0);
-INSERT INTO `sys_file` VALUES ('1608687653888937985', '2022-12-30 12:53:19', NULL, 'admin', NULL, 'A01', NULL, '6e67087d-e48a-4dd3-9632-ee669ffc0187code.jpg', '67bb71d749c34ede8108021ec2c1452f.jpg', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1608691048011988994', '2022-12-30 13:06:48', NULL, 'admin', NULL, 'A01', 2, 'project3/a14a61bf-e0cc-439b-82fe-ceab4d4dae44.jpg', 'project3/a14a61bf-e0cc-439b-82fe-ceab4d4dae44.jpg', 2, '学生作业-封面', 0);
-INSERT INTO `sys_file` VALUES ('1608691048418836482', '2022-12-30 13:06:48', NULL, 'admin', NULL, 'A01', 2, 'project3/a14a61bf-e0cc-439b-82fe-ceab4d4dae44.sb3', 'project3/a14a61bf-e0cc-439b-82fe-ceab4d4dae44.sb3', 2, '学生作业-sb3', 0);
-INSERT INTO `sys_file` VALUES ('1612344241002536961', '2023-01-09 15:03:17', NULL, 'admin', NULL, 'A01', NULL, '6e67087d-e48a-4dd3-9632-ee669ffc0187code.jpg', '55ae580f1d31403ebf8ba66d3092a094.jpg', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1612349608298176514', '2023-01-09 15:24:37', NULL, 'admin', NULL, 'A01', NULL, 'map.jpg', 'e788a77fafa943f08cfe77785194eebd.jpg', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1612350739757854721', '2023-01-09 15:29:07', NULL, 'admin', NULL, 'A01', NULL, '6e67087d-e48a-4dd3-9632-ee669ffc0187code.jpg', 'b893dbb7324c4c80807b468b5e7a7e3f.jpg', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1612350768891490306', '2023-01-09 15:29:13', NULL, 'admin', NULL, 'A01', NULL, '6e67087d-e48a-4dd3-9632-ee669ffc0187code.jpg', '4670249d28704923811397a063e083d5.jpg', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1612366754000596993', '2023-01-09 16:32:45', NULL, 'admin', NULL, 'A01', 2, 'project3/8288a613-7a75-42da-896c-cc727493e8f0.sb3', 'project3/8288a613-7a75-42da-896c-cc727493e8f0.sb3', 2, '学生作业-sb3', 0);
-INSERT INTO `sys_file` VALUES ('1612366754227089409', '2023-01-09 16:32:45', NULL, 'admin', NULL, 'A01', 2, 'project3/8288a613-7a75-42da-896c-cc727493e8f0.jpg', 'project3/8288a613-7a75-42da-896c-cc727493e8f0.jpg', 2, '学生作业-封面', 0);
-INSERT INTO `sys_file` VALUES ('1612381183454932993', '2023-01-09 17:30:05', NULL, 'admin', NULL, 'A01', NULL, '54177a9ff63f4b649cd2be7c413a2ab4.jpg', 'c692359341d94ccab47dd268f99bee85.jpg', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1613107117946531841', '2023-01-11 17:34:41', NULL, 'admin', NULL, 'A01', NULL, 'fd3ce1bfcf904b0b8a804132bfa57cac.jpg', '290fdda5854e46779f55c9b7b0d47f06.jpg', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1613398218158895105', '2023-01-12 12:51:25', NULL, 'admin', NULL, 'A01', NULL, '新作品.sb3', 'a176bfc29b624fe48540d76dae79b5ba.sb3', 2, '后台上传', 0);
-INSERT INTO `sys_file` VALUES ('1613401775478140929', '2023-01-12 13:05:33', NULL, 'admin', NULL, 'A01', 2, 'project3/dbc56fdf-57d1-4950-9067-befa703f48e4.sb3', 'project3/dbc56fdf-57d1-4950-9067-befa703f48e4.sb3', 2, '学生作业-sb3', 0);
-INSERT INTO `sys_file` VALUES ('1613401775759159298', '2023-01-12 13:05:33', NULL, 'admin', NULL, 'A01', 2, 'project3/dbc56fdf-57d1-4950-9067-befa703f48e4.jpg', 'project3/dbc56fdf-57d1-4950-9067-befa703f48e4.jpg', 2, '学生作业-封面', 0);
 
 -- ----------------------------
 -- Table structure for sys_fill_rule
@@ -2397,7 +2260,6 @@ CREATE TABLE `teaching_work_comment`  (
 -- ----------------------------
 -- Records of teaching_work_comment
 -- ----------------------------
-INSERT INTO `teaching_work_comment` VALUES ('1517396058051776513', 'admin', '2022-04-22 14:53:06', NULL, NULL, 'A03', '1517395583084597249', '这个作品太强了！', 'e9ca23d68d884d4ebb19d07889727dae');
 
 -- ----------------------------
 -- Table structure for teaching_work_correct
@@ -2420,13 +2282,6 @@ CREATE TABLE `teaching_work_correct`  (
 -- ----------------------------
 -- Records of teaching_work_correct
 -- ----------------------------
-INSERT INTO `teaching_work_correct` VALUES ('1515613512401932290', 'admin', '2022-04-17 16:49:54', NULL, NULL, 'A01', '1515608509045952514', 5, '不错');
-INSERT INTO `teaching_work_correct` VALUES ('1517395806435479553', 'admin', '2022-04-22 14:52:06', NULL, NULL, 'A03', '1517395755046866945', 5, '很棒');
-INSERT INTO `teaching_work_correct` VALUES ('1517395886576046082', 'admin', '2022-04-22 14:52:25', NULL, NULL, 'A03', '1517395625572896770', 5, '厉害');
-INSERT INTO `teaching_work_correct` VALUES ('1517395915856482305', 'admin', '2022-04-22 14:52:32', NULL, NULL, 'A03', '1517395583084597249', 5, '太神奇了');
-INSERT INTO `teaching_work_correct` VALUES ('1517398409009500161', 'teacher', '2022-04-22 15:02:27', NULL, NULL, 'A01A06A01', '1517396542489694209', 5, NULL);
-INSERT INTO `teaching_work_correct` VALUES ('1587019800200798209', 'teacher', '2022-10-31 17:53:00', NULL, NULL, 'A01A06A01', '1587019591622254594', 5, NULL);
-INSERT INTO `teaching_work_correct` VALUES ('1608691144485175297', 'admin', '2022-12-30 13:07:11', NULL, NULL, 'A01', '1608691048804712450', 5, '666');
 
 -- ----------------------------
 -- Table structure for wechat_user
@@ -2461,10 +2316,5 @@ CREATE TABLE `wechat_user`  (
 -- ----------------------------
 -- Records of wechat_user
 -- ----------------------------
-INSERT INTO `wechat_user` VALUES ('1236921740769107969', NULL, 'oJgzvv5A0yUkNGprRqd7l4OhVJLg', 'ooKi0v9gOeFDqMA7e3hRi-7Mee9o', '创客*赵文栋', NULL, '', '', '', 'http://thirdwx.qlogo.cn/mmopen/vi_32/LbPiaLiaWH3Zx4xXOicj9LLfviasiaHcj8Jj27ibbFCNmTbnAcPceA2IvecgbxIC0yD26wLxyDzj9EtiaZNicqnpfZ8iaNg/132', NULL, NULL, NULL, NULL, '2020-03-09 15:48:18', NULL, '2020-03-09 22:33:17', NULL, 'wx2154aa8b958db927');
-INSERT INTO `wechat_user` VALUES ('1236926173020168194', NULL, 'oJgzvv2z2Ern6UccZy007CwPj7JU', 'ooKi0vweMEO8vi_4W3mvzDo8Vn8E', 'Evil Lord', NULL, '菏泽', '山东', '菏泽', 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKGKnRsqeCd7Seuqt6vWKOicbQCkdGXSiaLYpPrm4pZwKWibTZdibpPia7hic7k3DQTjAlxIEX36lCicqD3g/132', NULL, NULL, NULL, NULL, '2020-03-09 16:05:55', 'admin', '2020-03-09 18:01:30', NULL, 'wx2154aa8b958db927');
-INSERT INTO `wechat_user` VALUES ('1236943560297684994', '1236947419388825601', 'oJgzvv7Q58w_l7KSLSFz8xIlv_cM', 'ooKi0v9p1LOLeW1CDlex1i1Wvi6M', '程宇', NULL, '金山', '上海', '金山', 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLUNenNGYxS1TIj3XDBTaIxk3UWQ78CiadVFvplFkeT1WqUNxZ5FZibfy3iaPGIpqXIibXNlXibcMIcUSw/132', NULL, NULL, NULL, NULL, '2020-03-09 17:15:00', NULL, '2020-03-09 17:30:20', NULL, 'wx2154aa8b958db927');
-INSERT INTO `wechat_user` VALUES ('1236951423414030338', NULL, 'oJgzvv9UJ2T7e6a-pLR17ol3D0i8', 'ooKi0v5b01XJgrmCtAKCa0vsNiXU', '请假', NULL, '徐汇', '上海', '徐汇', 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKQNUgjtVPmh2SjWGHghzSSPl0ONy26LfDfbWsSrNdecQXibv5A1YVjhgoTL8ON0WdDabcoibS0LdJw/132', NULL, NULL, NULL, NULL, '2020-03-09 17:46:15', NULL, '2020-03-09 17:46:56', NULL, 'wx2154aa8b958db927');
-INSERT INTO `wechat_user` VALUES ('1237023690286288897', NULL, 'oJgzvv7XGJkPwZ1onrZ8vEFo5cfo', 'ooKi0v5qdNUy024SN4JBuDmg46Hw', '毓', NULL, '', '', '', 'http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83erFX7Vn1goXrtxOjJEx0VyUmRJ5DicicRaXoibBCNqibwvUFSicoFFA9reZXjWuiapoeicp1pOsGkuYicSUXg/132', NULL, NULL, NULL, NULL, '2020-03-09 22:33:25', NULL, NULL, NULL, 'wx2154aa8b958db927');
 
 SET FOREIGN_KEY_CHECKS = 1;
