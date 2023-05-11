@@ -37,8 +37,8 @@
       }
     },
     created() {
-      if(this.$store.getters.sysConfig.logo && this.$store.getters.sysConfig.qiniuDomain){
-        this.logo = this.$store.getters.sysConfig.qiniuDomain + "/" + this.$store.getters.sysConfig.logo
+      if(this.$store.getters.sysConfig.logo && this.$store.getters.sysConfig.pathDomain){
+        this.logo = this.$store.getters.sysConfig.pathDomain + "/" + this.$store.getters.sysConfig.logo
       }
     },
     mounted () {
